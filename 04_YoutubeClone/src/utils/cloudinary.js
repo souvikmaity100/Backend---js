@@ -25,5 +25,20 @@ const uplodeOnCloudinary = async (localFilePath) => {
   }
 };
 
+const deleteFromCloudinary  = async (cloudinaryPath) => {
+  try {
+    if (!cloudinaryPath) return null;
+    // Regular expression to extract the part after the last '/' and type
+    const trimmedPart = cloudinaryPath.match(/\/([^\/]+)\.\w+$/)[1];
+    // delete the file on cloudinary
+    const response = await cloudinary.uploader.destroy(cloudinaryPath)
+    return response
 
-export {uplodeOnCloudinary}
+  } catch (error) {
+    console.log(`Failed to delete Image ${error}`);
+    return null
+  }
+}
+
+
+export {uplodeOnCloudinary, deleteFromCloudinary}

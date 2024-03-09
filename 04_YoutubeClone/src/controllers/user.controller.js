@@ -1,7 +1,7 @@
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { ApiError } from "../utils/ApiError.js";
 import { User } from "../models/user.model.js";
-import { uplodeOnCloudinary } from "../utils/cloudinary.js";
+import { uplodeOnCloudinary, deleteFromCloudinary } from "../utils/cloudinary.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import jwt from "jsonwebtoken";
 import mongoose from "mongoose";
@@ -14,7 +14,7 @@ const generateAccessAndRefreshTokens = async (userId) => {
 
     user.refreshToken = refreshToken;
     await user.save({ validateBeforeSave: false }); // Avoid validation on save for the current request only
-
+    
     return { accessToken, refreshToken };
   } catch (error) {
     console.log(error);
@@ -186,7 +186,7 @@ const logoutUser = asyncHandler(async (req, res) => {
 });
 
 const refreshAccessToken = asyncHandler(async (req, res) => {
-  const incomingRefreshToken = req.cookie.refreshToken || req.body.refreshToken;
+  const incomingRefreshToken = req.cookie?.refreshToken || req.body?.refreshToken;
 
   if (!incomingRefreshToken) {
     throw new ApiError(401, "Unauthorized request");
@@ -197,13 +197,14 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
       incomingRefreshToken,
       process.env.REFRESH_TOKEN_SECRET,
     );
-  
-    const user = User.findById(decodedToken?._id);
-  
+
+    
+    const user =await User.findById(decodedToken?._id);
+    
     if (!user) {
       throw new ApiError(401, "Invalid refresh token");
     }
-  
+    
     if (incomingRefreshToken !== user?.refreshToken) {
       throw new ApiError(401, "Refresh token is expired or used");
     }
@@ -213,12 +214,12 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
       secure: true
     }
   
-    const {accessToken, newRefreshToken} = await generateAccessAndRefreshTokens(user._id)
+    const {accessToken, refreshToken} = await generateAccessAndRefreshTokens(user._id)
   
     return res.status(200)
     .cookie("accessToken", accessToken ,options)
-    .cookie("refreshToken", newRefreshToken ,options)
-    .json(new ApiResponse(200, {accessToken, newRefreshToken}, "Access token refreshed"));
+    .cookie("refreshToken", refreshToken ,options)
+    .json(new ApiResponse(200, {accessToken, refreshToken}, "Access token refreshed"));
   } catch (error) {
     throw new ApiError(401, error?.message || "Invalid refresh token");
   }
@@ -281,6 +282,15 @@ const updateUserAvatar = asyncHandler(async (req, res) => {
     throw new ApiError(400, "Error while uploding on avatar")
   }
 
+  // delete old avatar
+  const oldUser  = await User.findById(req.user?._id)
+  const removeOldImage = await deleteFromCloudinary(oldUser.avatar)
+
+  if (!oldUser && !removeOldImage) {
+    throw new ApiError(400, "something went wrong when deleting the old avatar")
+  }
+
+
   const user = await User.findByIdAndUpdate(
     req.user?._id, 
     {
@@ -305,6 +315,14 @@ const updateUserCoverImage = asyncHandler(async (req, res) => {
 
   if (!coverImage.url) {
     throw new ApiError(400, "Error while uploding on Cover Image")
+  }
+
+  // delete old Cover Image
+  const oldUser  = await User.findById(req.user?._id)
+  const removeOldCoverImage = await deleteFromCloudinary(oldUser.coverImage)
+  
+  if (!oldUser && !removeOldCoverImage) {
+    throw new ApiError(400, "something went wrong when deleting the old cover image")
   }
 
   const user = await User.findByIdAndUpdate(
