@@ -1,11 +1,12 @@
 const fs = require('fs')
+const os = require('os')
 
-// This is a synchronous
-// fs.writeFileSync('./test.txt', 'Hii file')
+// This is a synchronous : Blocking
+fs.writeFileSync('./test.txt', 'Hii file')
 
 
-// This is asynchronous
-// fs.writeFile('./test2.txt', 'welcome', (err) => {})
+// This is asynchronous : Non-Blocking
+fs.writeFile('./test2.txt', 'welcome', (err) => {})
 
 
 
@@ -38,4 +39,25 @@ const fs = require('fs')
 // console.log(stat);
 
 
-fs.mkdirSync('my-docs')
+// fs.mkdirSync('my-docs')
+
+
+// Blocking Code
+// console.log(1);
+// const result = fs.readFileSync('./dummy.txt', 'utf-8')
+// console.log(result);
+// console.log(2);
+
+// Non-Blocking 
+// console.log(1);
+// fs.readFile('./dummy.txt', 'utf-8', (err, data) => {
+//     console.log(data);
+// })
+// console.log(2);
+
+
+// Default thread poolsize: 4
+// Max Thread : depends on machine to machine
+
+console.log(os.cpus());
+console.log(os.cpus().length);
