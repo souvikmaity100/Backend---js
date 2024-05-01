@@ -5,3 +5,7 @@ Req Type: DELETE | Req Time: 1714570148823 | Req Path: /api/users/11
 Req Type: GET | Req Time: 1714570268917 | Req Path: /favicon.ico | User IP: ::1 
 Req Type: GET | Req Time: 1714570282610 | Req Path: /api/users | User IP: ::1 
 Req Type: GET | Req Time: 1714570978035 | Req Path: /api/users | User IP: ::1 
+Req Type: POST | Req Time: 1714571996889 | Req Path: /api/users | User IP: ::1 
+Req Type: POST | Req Time: 1714572356809 | Req Path: /api/users | User IP: ::1 
+Req Type: POST | Req Time: 1714572433254 | Req Path: /api/users | User IP: ::1 
+Req Type: GET | Req Time: 1714572593681 | Req Path: /api/users/10 | User IP: ::1 
