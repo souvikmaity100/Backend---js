@@ -33,6 +33,8 @@ app.use((req, res, next) => {
 // --------------REST API--------------
 // Get All Users
 app.get('/api/users', (req, res) => {
+    // Always add X to custome header for good practice
+    res.setHeader('X-creator', 'souvik') // Custom Header
     return res.json(users)
 })
 
