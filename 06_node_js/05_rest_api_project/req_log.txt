@@ -1,0 +1,6 @@
+Req Type: GET | Req Time: 1714570109380 | Req Path: /api/users 
+Req Type: GET | Req Time: 1714570120119 | Req Path: /api/users/1001 
+Req Type: GET | Req Time: 1714570130886 | Req Path: /api/users/1 
+Req Type: DELETE | Req Time: 1714570148823 | Req Path: /api/users/11 
+Req Type: GET | Req Time: 1714570268917 | Req Path: /favicon.ico | User IP: ::1 
+Req Type: GET | Req Time: 1714570282610 | Req Path: /api/users | User IP: ::1 

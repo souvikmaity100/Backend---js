@@ -22,6 +22,14 @@ app.get('/users', (req, res) => {
 // Middleware - 
 app.use(express.urlencoded({ extended: false }))
 
+app.use((req, res, next) => {
+    fs.appendFile('req_log.txt', `Req Type: ${req.method} | Req Time: ${Date.now()} | Req Path: ${req.path} | User IP: ${req.ip} \n`, (err, data) =>{
+        next();
+    })
+    // console.log(req.path);
+})
+
+
 // --------------REST API--------------
 // Get All Users
 app.get('/api/users', (req, res) => {
