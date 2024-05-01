@@ -29,3 +29,5 @@
 1713297698337: New Request on : /about?q=sam&id=15
 1713297801331: New Request on : /about?q=sam&id=15
 1713297958572: New Request on : /about?user=sam&id=15
+1714535521532: New Request on : /, request type: GET
+1714535901283: New Request on : /signup, request type: GET
