@@ -1,0 +1,20 @@
+REST API - JSON
+
+GET /users - List all Users in HTML Format
+GET /api/users - List all Users in JSON Format
+
+GET /api/users/1 - Get the user with ID : 1
+GET /api/users/2 - Get the user with ID : 2
+
+Dynamic Path parameters :
+GET /api/users/:id
+:id -> This is a veriable
+
+POST /api/users - Create a user
+
+PATCH /api/users/1 - Edit the user with ID : 1
+
+DELETE /api/users/1 - Delete the user with ID : 1
+
+
+For dummy data we using: https://mockaroo.com/
