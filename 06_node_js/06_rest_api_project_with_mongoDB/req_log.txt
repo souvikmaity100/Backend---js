@@ -14,3 +14,13 @@ Req Type: POST | Req Time: 1714583981517 | Req Path: /api/users | User IP: ::1
 Req Type: GET | Req Time: 1714583995635 | Req Path: /api/users | User IP: ::1 
 Req Type: DELETE | Req Time: 1714584023485 | Req Path: /api/users/663279ad77da3f4936a7d36b | User IP: ::1 
 Req Type: GET | Req Time: 1714584032329 | Req Path: /api/users | User IP: ::1 
+Req Type: GET | Req Time: 1714660836696 | Req Path: /favicon.ico | User IP: ::1 
+Req Type: GET | Req Time: 1714660845756 | Req Path: /api/users | User IP: ::1 
+Req Type: GET | Req Time: 1714660871697 | Req Path: /api/user | User IP: ::1 
+Req Type: GET | Req Time: 1714660887044 | Req Path: /api/user/663286795e930de5e685df4f | User IP: ::1 
+Req Type: GET | Req Time: 1714661245368 | Req Path: /api/users | User IP: ::1 
+Req Type: GET | Req Time: 1714661262041 | Req Path: /api/users/663286795e930de5e685df4f | User IP: ::1 
+Req Type: POST | Req Time: 1714661312153 | Req Path: /api/users | User IP: ::1 
+Req Type: GET | Req Time: 1714661356195 | Req Path: /users | User IP: ::1 
+Req Type: DELETE | Req Time: 1714661397549 | Req Path: /api/users/6633a7c06eae88104a795718 | User IP: ::1 
+Req Type: GET | Req Time: 1714661403234 | Req Path: /api/users | User IP: ::1 
