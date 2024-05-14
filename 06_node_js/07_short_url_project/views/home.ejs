@@ -65,7 +65,7 @@
 
     <form action="/url" method="post">
         <div>
-            <input type="url" name="url" placeholder="Enter your Original URL" />
+            <input type="url" name="url" placeholder="Enter your Original URL" required/>
         </div>
         <div>
             <input class="btn" type="submit" value="Generate">
@@ -73,11 +73,12 @@
     </form>
 
     <% if (locals.id) { %>
-     <h2>URL Generated: <a href="http://localhost:4000/url/<%= id %>" target="_blank">
-        http://localhost:4000/url/<%= id %>
+     <h2>URL Generated: <a href="http://localhost:4000/visit/<%= id %>" target="_blank">
+        http://localhost:4000/visit/<%= id %>
      </a></h2>
     <% } %>
 
+    <% if (locals.urls) { %>
     <table>
         <tr>
             <th>SL. NO.</th>
@@ -90,13 +91,14 @@
                 <td><%= index + 1 %></td>
                 <td><%= url.redirectURL %></td>
                 <td>
-                    <a href="http://localhost:4000/url/<%= url.shortId %>" target="_blank">
-                        http://localhost:4000/url/<%= url.shortId %></a>
+                    <a href="http://localhost:4000/visit/<%= url.shortId %>" target="_blank">
+                        http://localhost:4000/visit/<%= url.shortId %></a>
                 </td>
                 <td><%= url.visitHistory.length %></td>
             </tr>
         <% }) %>
     </table>
+    <% } %>
 </body>
 
 </html>

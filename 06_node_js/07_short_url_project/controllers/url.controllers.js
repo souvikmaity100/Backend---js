@@ -8,14 +8,12 @@ async function generateNewShortURL(req, res) {
     await URL.create({
         shortId,
         redirectURL: body.url,
-        visitHistory: []
+        visitHistory: [],
+        createdBy: req.user._id
     })
 
     const allUrls = await URL.find({})
-    return res.render('home', {
-        id: shortId,
-        urls: allUrls
-    })
+    return res.redirect('/')
     // return res.status(200).json({ id: shortId })
 }
 
@@ -30,7 +28,7 @@ async function visitGeneratedURL(req, res) {
             }
         }
     })
-    res.redirect(entry.redirectURL)
+    return res.redirect(entry.redirectURL)
 }
 
 async function getAnalytics(req, res) {
