@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        a{
+            text-decoration: none;
+        }
+        h1 {
+            text-align: center;
+            padding: 1rem;
+            text-transform: uppercase;
+        }
+        h2{
+            text-align: center;
+            padding: 1rem;
+        }
+        form{
+            max-width: 600px;
+            border: 2px solid black;
+            padding: 1rem;
+            border-radius: 10px;
+            margin: 0 auto;
+        }
+        form input{
+            width: 100%;
+            padding: 0.5rem;
+            font-size: 1.2rem;
+        }
+        .btn{
+            margin-top: 0.5rem;
+            cursor: pointer;
+        }
+
+        table{
+            width: fit-content;
+            margin: 0 auto;
+            
+        }
+        table tr *{
+            border-bottom: 1px solid black;
+            padding: 0.5rem;
+        }
+        table tr td:last-child{
+            text-align: center;
+        }
+        table tr td:first-child{
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>URL Shortener</h1>
+
+    <form action="/url" method="post">
+        <div>
+            <input type="url" name="url" placeholder="Enter your Original URL" />
+        </div>
+        <div>
+            <input class="btn" type="submit" value="Generate">
+        </div>
+    </form>
+
+    <% if (locals.id) { %>
+     <h2>URL Generated: <a href="http://localhost:4000/url/<%= id %>" target="_blank">
+        http://localhost:4000/url/<%= id %>
+     </a></h2>
+    <% } %>
+
+    <table>
+        <tr>
+            <th>SL. NO.</th>
+            <th>Original URL</th>
+            <th>Generate URL</th>
+            <th>No Of Clicks</th>
+        </tr>
+        <% urls.forEach((url, index) => { %>
+            <tr>
+                <td><%= index + 1 %></td>
+                <td><%= url.redirectURL %></td>
+                <td>
+                    <a href="http://localhost:4000/url/<%= url.shortId %>" target="_blank">
+                        http://localhost:4000/url/<%= url.shortId %></a>
+                </td>
+                <td><%= url.visitHistory.length %></td>
+            </tr>
+        <% }) %>
+    </table>
+</body>
+
+</html>

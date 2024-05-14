@@ -11,7 +11,12 @@ async function generateNewShortURL(req, res) {
         visitHistory: []
     })
 
-    return res.status(200).json({ id: shortId })
+    const allUrls = await URL.find({})
+    return res.render('home', {
+        id: shortId,
+        urls: allUrls
+    })
+    // return res.status(200).json({ id: shortId })
 }
 
 async function visitGeneratedURL(req, res) {
