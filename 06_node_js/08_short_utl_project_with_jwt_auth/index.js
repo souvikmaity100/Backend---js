@@ -1,7 +1,7 @@
 const express = require('express')
 const path = require('path')
 const cookieParser = require('cookie-parser')
-const { checkUserLoginStatus, checkAuth } = require('./middlewares/auth.middleware')
+const { ckeckForAuthentication, restrictTo } = require('./middlewares/auth.middleware')
 const { connectMongoDb } = require('./db/connection')
 const { visitGeneratedURL } = require('./controllers/url.controllers')
 
@@ -20,11 +20,12 @@ app.set('views', path.resolve('./views'))
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 app.use(cookieParser())
+app.use(ckeckForAuthentication)
 
 
 app.use('/user', userRoute)
-app.use('/url', checkUserLoginStatus, urlRoute)
-app.use('/', checkAuth, staticRoute)
+app.use('/url', restrictTo(['NORMAL', 'ADMIN']), urlRoute)
+app.use('/', staticRoute)
 
 app.get('/visit/:shortId', visitGeneratedURL)
 

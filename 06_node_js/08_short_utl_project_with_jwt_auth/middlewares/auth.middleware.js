@@ -1,32 +1,28 @@
 const { getUser } = require('../service/auth')
 
-async function checkUserLoginStatus(req, res, next) {
-    const userToken = req.headers["authorization"]
-    if(!userToken) return res.redirect('/login')
+function ckeckForAuthentication(req, res, next) {
+    const tokenCookie = req.cookies?.userToken
+    req.user = null
+    if(!tokenCookie) return next()
 
-    const token = userToken.split('Bearer ')[1] // "Bearer fah54dfdsf5sff45sf"
+    const token = tokenCookie
     const user = getUser(token)
 
-    if(!user) return res.redirect('/login')
-    
     req.user = user
-    next()
+    return next()
 }
 
-async function checkAuth(req, res, next) {
-    const userToken = req.headers["authorization"]
-
-    console.log("abcd----------",req.headers);
-
-    const token = userToken.split('Bearer ')[1] // "Bearer fah54dfdsf5sff45sf"
-    const user = getUser(token)
-
-
-    req.user = user
-    next()
+function restrictTo(roles) {
+    return function(req, res, next){
+        if(!req.user) return res.redirect('/login')
+        
+        if(!roles.includes(req.user.role)) return res.end('Un Authorized')
+        
+        next()
+    }
 }
 
 module.exports = {
-    checkUserLoginStatus,
-    checkAuth
+    ckeckForAuthentication,
+    restrictTo
 }

@@ -20,9 +20,9 @@ async function userLogIn(req, res){
     })
 
     const token = setUser(user)
-    // res.cookie('userToken', token)
-    // return res.redirect('/')
-    return res.json({ token })
+    res.cookie('userToken', token)
+    return res.redirect('/')
+    // return res.json({ token })
 }
 
 
