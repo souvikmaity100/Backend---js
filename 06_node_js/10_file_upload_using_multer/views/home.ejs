@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Upload</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: cursive;
+        }
+
+        h2 {
+            text-align: center;
+            padding: 2rem;
+            font-size: 2rem;
+        }
+
+        form {
+            width: 500px;
+            margin: 0 auto;
+            background-color: darkcyan;
+            padding: 1rem;
+            border: 2px solid black;
+            border-radius: 10px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        form>* {
+            font-size: 1.2rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>File Upload</h2>
+    <form  action="/upload" method="post" enctype="multipart/form-data">
+        <input type="file" name="uaerImage" />
+        <button>Upload</button>
+    </form>
+
+</body>
+
+</html>
