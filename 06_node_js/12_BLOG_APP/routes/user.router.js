@@ -1,5 +1,5 @@
 const { Router } = require("express")
-const { renderSignin, renderSignup, handelSignup, handelSignin } = require("../controllers/user.controller")
+const { renderSignin, renderSignup, handelSignup, handelSignin, handelLogout } = require("../controllers/user.controller")
 
 const router = Router()
 
@@ -11,6 +11,8 @@ router.get('/signup', renderSignup)
 router.post('/signup', handelSignup)
 
 router.post('/signin', handelSignin)
+
+router.get('/logout', handelLogout)
 
 
 module.exports = router

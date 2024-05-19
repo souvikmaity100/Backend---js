@@ -22,12 +22,20 @@ const handelSignup = async (req, res) => {
 
 const handelSignin = async (req, res) => {
     const { email, password } = req.body
+    try {
 
-    const user = await User.matchPassword(email, password)
+        const token = await User.matchPasswordAndGenerateToken(email, password)
 
-    console.log('User', user)
+        return res.cookie("token", token).redirect("/")
+    } catch (error) {
+        return res.render('signin', {
+            error: "Incorrect Email or Password"
+        })
+    }
+}
 
-    return res.redirect("/")
+const handelLogout = (req, res) => {
+    res.clearCookie('token').redirect('/')
 }
 
 
@@ -35,5 +43,6 @@ module.exports = {
     renderSignin,
     renderSignup,
     handelSignup,
-    handelSignin
+    handelSignin,
+    handelLogout
 }
