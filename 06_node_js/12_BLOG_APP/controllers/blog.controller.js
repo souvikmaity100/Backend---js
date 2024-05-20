@@ -1,5 +1,4 @@
 const Blog = require("../models/blog.model")
-const User = require("../models/user.model")
 
 const renderAddBlog = (req, res) => {
     return res.render("addBlog", {

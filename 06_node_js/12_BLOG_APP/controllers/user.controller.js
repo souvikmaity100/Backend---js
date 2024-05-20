@@ -10,12 +10,21 @@ const renderSignup = (req, res) => {
 
 const handelSignup = async (req, res) => {
     const { fullName, email, password } = req.body
-
-    await User.create({
-        fullName,
-        email,
-        password
-    })
+    const profileImage = req.file?.filename
+    if(profileImage){
+        await User.create({
+            fullName,
+            email,
+            password,
+            profileImageURL: `/images/${profileImage}`
+        })
+    }else {
+        await User.create({
+            fullName,
+            email,
+            password
+        })
+    }
 
     return res.redirect("/")
 }
