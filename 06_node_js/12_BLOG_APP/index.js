@@ -5,6 +5,9 @@ var cookieParser = require('cookie-parser')
 const { checkAuthenticationCookie } = require("./middlewares/authentication.middleware")
 
 const userRoute = require("./routes/user.router")
+const blogRoute = require("./routes/blog.router")
+
+const Blog = require("./models/blog.model")
 
 
 const app = express()
@@ -20,12 +23,15 @@ app.use(express.static("./public"))
 app.use(cookieParser())
 app.use(checkAuthenticationCookie('token'))
 
-app.get('/', (req, res) => {
+app.get('/', async (req, res) => {
+    const allBlogs = await Blog.find({}).sort({"createdat": -1})
     res.render('home', {
-        user: req.user
+        user: req.user,
+        blogs: allBlogs
     })
 })
 
 app.use('/user', userRoute)
+app.use('/blog', blogRoute)
 
 app.listen(PORT, () => console.log(`App started on: http://localhost:${PORT}`))

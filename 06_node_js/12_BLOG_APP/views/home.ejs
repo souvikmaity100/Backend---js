@@ -1,14 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <%- include('./partials/head') %>
-    <title>i-Blog - Home</title> 
+        <title>i-Blog - Home</title>
 </head>
+
 <body>
     <%- include('./partials/nav') %>
-    
-    <%= JSON.stringify(user) %>
 
-    <%- include('./partials/scripts') %>
+        <div class="container">
+            <h2 class="text-center p-2">All Blogs</h2>
+            <div class="row py-2">
+
+                <% blogs.forEach(blog=> { %>
+                    <div class="col-12 col-md-6 col-lg-4 col-xl-3 p-1">
+                        <div class="card">
+                            <div class="bg-image hover-overlay" data-mdb-ripple-init data-mdb-ripple-color="light" style="height: 250px; background: url('<%= blog.coverImageURL %>') center; background-size: cover;">
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title"><%= blog.title %></h5>
+                                <p class="card-text"><%= blog.body.slice(0, 80) %>...</p>
+                                <a href="/blog/<%= blog._id %>" class="btn btn-primary" data-mdb-ripple-init>Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                <% }) %>
+
+            </div>
+        </div>
+
+        <%- include('./partials/scripts') %>
 </body>
+
 </html>

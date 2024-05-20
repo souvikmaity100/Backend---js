@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('./partials/head') %>
+        <title>i-Blog - Add Blog</title>
+</head>
+
+<body>
+    <%- include('./partials/nav') %>
+
+        <div class="container">
+            <div class="card p-3 mt-5 mx-auto" style="max-width: 500px;">
+                <h2 class="text-center p-2">Add New Blog</h2>
+                <form method="post" action="/blog" enctype="multipart/form-data">
+                    <!-- Title input -->
+                    <div data-mdb-input-init class="form-outline mb-4">
+                        <label class="form-label" for="topic">Title:</label>
+                        <input type="text" id="topic" class="form-control" name="title" required/>
+                    </div>
+
+                    <!-- Image input -->
+                    <div data-mdb-input-init class="form-outline mb-4">
+                        <label class="form-label" for="coverImage">Cover Image:</label>
+                        <input type="file" id="coverImage" class="form-control" name="coverImage" required/>
+                    </div>
+
+                    <!-- Message input -->
+                    <div data-mdb-input-init class="form-outline mb-4">
+                        <label class="form-label" for="description">Description:</label>
+                        <textarea class="form-control" id="description" rows="4" style="resize: none;" name="body" required></textarea>
+                    </div>
+
+
+                    <!-- Submit button -->
+                    <button data-mdb-ripple-init type="submit" class="btn btn-primary btn-block mb-4">Add Blog</button>
+                </form>
+            </div>
+        </div>
+
+        <%- include('./partials/scripts') %>
+</body>
+
+</html>
